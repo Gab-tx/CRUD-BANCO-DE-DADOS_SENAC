@@ -1,4 +1,4 @@
-from connection import *
+from app.database.connection import *
 from validations import validations as v
 from utils.utils import *
 
