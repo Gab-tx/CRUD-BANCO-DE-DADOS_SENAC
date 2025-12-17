@@ -1,6 +1,7 @@
 from app.database.connection import *
 from validations import validations as v
 from utils.utils import *
+from ..queries import *
 
 
 
@@ -9,14 +10,13 @@ from utils.utils import *
 #-- Read
 def find_student_by_id(id:int):
     '''Retornar um usuário pelo ID'''
-    sql = 'SELECT * FROM tbl_aluno WHERE id_aluno = %s;'
 
     with connect() as CONN:
         if CONN is not None:
             with CONN.cursor() as cur:
                 try:
                     #Executa a consulta SQL
-                    cur.execute(sql, (id,))
+                    cur.execute(FIND_STUDENT_BY_ID, (id,))
                     return cur.fetchone()
                 except Exception as e:
                     print(e)
@@ -27,13 +27,11 @@ def find_student_by_id(id:int):
 #-- Read
 def find_all_students():
 
-    sql = 'select * from tbl_aluno'
-
     with connect() as CONN:
         if CONN is not None:
             with CONN.cursor() as cur:
                 try:
-                    cur.execute(sql)
+                    cur.execute(FIND_ALL_STUDENT)
                     return cur.fetchall()
                 except Exception as e:
                     print(e)
@@ -60,8 +58,6 @@ def find_student_by_name(name:str):
 #-- Create 
 def insert_student(nome:str,sobrenome:str,idade:int,telefone:str,cpf:str,data_nascimento:str):
     '''Inserir um novo aluno'''
-    sql = f'''INSERT INTO tbl_aluno(nome,sobrenome,idade,telefone,cpf,data_nascimento)
-    VALUES (%s, %s, %s, %s, %s, %s)'''
 
     
     with connect() as CONN:
@@ -74,7 +70,7 @@ def insert_student(nome:str,sobrenome:str,idade:int,telefone:str,cpf:str,data_na
                     v.validation_cpf(cpf)
                     v.validation_phone(telefone)
                     #executa a consulta SQL
-                    cur.execute(sql, (nome, sobrenome, idade, telefone, cpf, convert_date(data_nascimento)))
+                    cur.execute(INSERT_STUDENT, (nome, sobrenome, idade, telefone, cpf, convert_date(data_nascimento)))
                     print(f'Aluno {nome} inserido com sucesso')
                 
                 except (v.AgeException,v.CpfException,v.DateException,v.PhoneException) as e:
@@ -121,15 +117,6 @@ def delete_many_students_by_id(list):
 
 def update_student(nome:str,sobrenome:str,idade:int,telefone:str,cpf:str,data_nascimento:str, id:int):
 
-    sql = '''UPDATE tbl_aluno 
-    SET nome=%s,
-    sobrenome=%s,
-    idade=%s,
-    telefone=%s,
-    cpf=%s,
-    data_nascimento=%s
-    WHERE id_aluno =%s'''
-
     with connect() as CONN:
      if CONN is not None:
          with CONN.cursor() as cur:
@@ -140,7 +127,7 @@ def update_student(nome:str,sobrenome:str,idade:int,telefone:str,cpf:str,data_na
                     v.validation_cpf(cpf)
                     v.validation_phone(telefone)
                 #Executa a consulta SQL
-                    cur.execute(sql, (nome,sobrenome,idade,telefone,cpf,convert_date(data_nascimento),id))
+                    cur.execute(UPDATE_STUDENT, (nome,sobrenome,idade,telefone,cpf,convert_date(data_nascimento),id))
                     print('Aluno atualizado com sucesso!')
                     return None
                 raise v.NotFoundStudent('Aluno não encontrado')
