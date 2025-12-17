@@ -1,6 +1,6 @@
 from app.database.connection import *
-from validations import validations as v
-from utils.utils import *
+from app.validations import validations as v
+from app.utils.utils import *
 from ..queries import *
 
 

@@ -1,4 +1,4 @@
-from exceptions.exceptions import *
+from app.exceptions.exceptions import *
 
 def validation_age(idade:int):
     '''Validação se a idade corresponde ao limite permitido. 0 - 150'''

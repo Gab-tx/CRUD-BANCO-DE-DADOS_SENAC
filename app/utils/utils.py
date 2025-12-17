@@ -1,5 +1,5 @@
 from datetime import datetime as dt
-from exceptions import exceptions as ex
+from app.exceptions import exceptions as ex
 
 #Função para converter data para padrão yyyy-mm-dd
 
