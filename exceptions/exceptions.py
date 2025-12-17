@@ -13,3 +13,7 @@ class CpfException(Exception):
 class DateException(Exception):
     def __init__(self, message):
         super().__init__(message)
+
+class NotFoundStudent(Exception):
+    def __init__(self, message):
+        super().__init__(message)

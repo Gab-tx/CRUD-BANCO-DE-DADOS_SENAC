@@ -1,4 +1,4 @@
-import os, psycopg as pg
+import os, psycopg as pg # type: ignore
 from dotenv import load_dotenv
 
 
