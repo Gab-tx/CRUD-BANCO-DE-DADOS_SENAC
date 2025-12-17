@@ -1,5 +1,7 @@
 from datetime import datetime as dt
 from app.exceptions import exceptions as ex
+from app.database.repositories import student as st
+from app.database.repositories import course 
 
 #Função para converter data para padrão yyyy-mm-dd
 

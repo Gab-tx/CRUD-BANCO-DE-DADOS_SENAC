@@ -133,3 +133,22 @@ def update_student(nome:str,sobrenome:str,idade:int,telefone:str,cpf:str,data_na
 
             except Exception as e:
                 print(f'Error: {e}')
+
+#Função para matricular estudante em uma turma
+
+def register_course(id_turma, id_student):
+    sql = '''UPDATE tbl_aluno 
+    SET fk_turma = %s 
+    WHERE id_aluno = %s'''
+
+    with connect() as CONN:
+        if CONN is not None:
+            with CONN.cursor() as cur:
+                try:
+                    if find_student_by_id(id_student):
+                        cur.execute(sql,(id_turma,id_student))
+                        print('Curso Atualizado')
+                        return
+                except Exception as e:
+                    print(f'Error: {e}')
+

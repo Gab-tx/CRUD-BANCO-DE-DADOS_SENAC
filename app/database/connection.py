@@ -17,7 +17,6 @@ def connect():
     '''<h4> Retorna a conexão com o banco de dados </h4>'''
     try:
         connection = pg.connect(f"user={user} password={password} host={address} port={port} dbname={dbname}")
-        print('log: Banco de dados conectados com sucesso')
         
         return connection
     except Exception as e:
