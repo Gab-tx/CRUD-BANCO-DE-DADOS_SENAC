@@ -21,3 +21,7 @@ UPDATE_STUDENT = '''UPDATE tbl_aluno
 FIND_ALL_STUDENT = 'select * from tbl_aluno'
 
 FIND_STUDENT_BY_ID = 'SELECT * FROM tbl_aluno WHERE id_aluno = %s'
+
+FIND_STUDENT_BY_NAME = 'SELECT * FROM tbl_aluno WHERE nome = %s'
+
+DELETE_STUDENT_BY_ID = '''DELETE FROM tbl_aluno WHERE id_aluno = %s'''

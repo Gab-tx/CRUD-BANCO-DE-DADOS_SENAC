@@ -1,8 +1,8 @@
-from querys.student import *
+from app.database.repositories import student as st
 
 def format_findAllStudents() -> str:
 
-    for i in find_all_students():
+    for i in st.find_all_students():
         print(f'''| Id: {i[0]}| Nome: {i[1]} {i[2]} | Idade: {i[3]} | Telefone: {i[4]} | CPF: {i[5]} | Data Nascimento: {i[6]} |''')
         
 

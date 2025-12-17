@@ -41,13 +41,12 @@ def find_all_students():
     
 #-- Read
 def find_student_by_name(name:str):
-    sql = '''SELECT * FROM tbl_aluno WHERE nome = %s;'''
 
     with connect() as CONN:
         if CONN is not None:
             with CONN.cursor() as cur:
                 try:
-                    cur.execute(sql, name)
+                    cur.execute(FIND_STUDENT_BY_NAME, (name,))
                     return cur.fetchone()
                 except Exception as e:
                     print(e)
@@ -59,7 +58,6 @@ def find_student_by_name(name:str):
 def insert_student(nome:str,sobrenome:str,idade:int,telefone:str,cpf:str,data_nascimento:str):
     '''Inserir um novo aluno'''
 
-    
     with connect() as CONN:
 
         if CONN is not None:
@@ -85,21 +83,19 @@ def insert_student(nome:str,sobrenome:str,idade:int,telefone:str,cpf:str,data_na
 
 #-- Delete
 def delete_student_by_Id(id: int):
-    sql = '''DELETE FROM tbl_aluno WHERE id_aluno = %s'''
 
     with connect() as CONN:
         if CONN is not None:
             with CONN.cursor() as cur:
                 try:
                     if find_student_by_id(id):
-                        cur.execute(sql, (id,))
+                        cur.execute(DELETE_STUDENT_BY_ID, (id,))
                     raise v.NotFoundStudent('Aluno não encontrado')
                 except Exception as e:
                     print('error: ',e)
         return None
     
 def delete_many_students_by_id(list):
-    sql = '''DELETE FROM tbl_aluno WHERE id_aluno = %s'''
 
     with connect() as CONN:
         if CONN is not None:
@@ -107,7 +103,7 @@ def delete_many_students_by_id(list):
                 try:
                     if find_student_by_id(id):
                         for i in list:
-                            cur.execute(sql, (i,))
+                            cur.execute(DELETE_STUDENT_BY_ID, (i,))
                     raise v.NotFoundStudent('Aluno não encontrado')
                 except Exception as e:
                     print('error:', e)
