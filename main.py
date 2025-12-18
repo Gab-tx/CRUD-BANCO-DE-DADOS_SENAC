@@ -4,9 +4,13 @@ from app.utils.utils import *
 def lista_estudantes() -> str:
 
     for i in st.find_all_students():
+        curso_tuple = course.display_course_by_turma_id(i[8])
 
-        print(f'''| Id: {i[0]}| Nome: {i[1]} {i[2]} | Idade: {i[3]} | Telefone: {i[4]} | CPF: {i[5]} | Data Nascimento: {i[6]} |
-curso: {course.display_course_by_turma_id(i[8])} |''')        
+        curso_nome = f'{curso_tuple[1]} ' if curso_tuple else "Sem curso"
+    
+
+        print(f'''\n| Id: {i[0]}| Nome: {i[1]} {i[2]} | Idade: {i[3]} | Telefone: {i[4]} | CPF: {i[5]} | Data Nascimento: {i[6]} |
+curso: {curso_nome} |''')        
 
 def main():
     # insert_student('Manoel','Gomes', 56, '85999223343', '12345678911','1969-12-02')
