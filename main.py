@@ -8,10 +8,9 @@ def lista_estudantes() -> str:
 
         curso_nome = f'{curso_tuple[1]} ' if curso_tuple else "Sem curso"
     
-
         print(f'''\n| Id: {i[0]}| Nome: {i[1]} {i[2]} | Idade: {i[3]} | Telefone: {i[4]} | CPF: {i[5]} | Data Nascimento: {i[6]} |
-curso: {curso_nome} |''')        
-
+curso: {curso_nome} |''')   
+         
 def main():
     # insert_student('Manoel','Gomes', 56, '85999223343', '12345678911','1969-12-02')
 
@@ -21,7 +20,7 @@ def main():
 
     # st.register_course(1,24)
 
-    lista_estudantes()
+    # lista_estudantes()
     # print(course.find_course_by_id(1))
 
     # print(st.find_all_students())

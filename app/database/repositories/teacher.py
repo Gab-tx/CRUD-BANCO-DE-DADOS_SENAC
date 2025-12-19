@@ -32,11 +32,49 @@ def find_all_teacher():
         if CONN is not None:
             with CONN.cursor() as cur:
                 try:
-                    #Executa a consulta SQL
                     cur.execute(SELECT_ALL_TEACHER)
                     return cur.fetchall()
                 except Exception as e:
                     print(f'Error: {e}')
                     return
-        return
+
+def insert_teacher(nome,sobrenome,telefone, cpf, data_nascimento, salario):
+     
+     with connect() as CONN:
+            with CONN.cursor() as cur:
+                try:
+                    v.validation_cpf(cpf)
+                    v.validation_phone(telefone)
+                    cur.execute(INSERT_TEACHER, (nome,sobrenome,telefone, cpf, convert_date(data_nascimento), salario))
+                
+                except Exception as e:
+                    print(f'Error: {e}')
+                    return
+                
+def update_teacher(nome,sobrenome,telefone, cpf, data_nascimento, salario, id_professor):
+     
+     with connect() as CONN:
+            with CONN.cursor() as cur:
+                try:
+                    v.validation_cpf(cpf)
+                    v.validation_phone(telefone)
+                    cur.execute(UPDATE_TEACHER, (nome,sobrenome,telefone, cpf, convert_date(data_nascimento), salario))
+                
+                except(v.CpfException,v.PhoneException) as e:
+                     print(e)
+                
+                except Exception as e:
+                    print(f'Error: {e}')
+                    return
+
+def delete_professor(id_professor):
+     
+     with connect() as CONN:
+          with CONN.cursor() as cur:
+            try:
+                cur.execute(DELETE_TEACHER(id_professor,))
+                
+            except Exception as e:
+                    print(f'error: {e}')
+     
 
