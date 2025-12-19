@@ -149,7 +149,7 @@ def register_course(id_turma, id_student):
                 except Exception as e:
                     print(f'Error: {e}')
 
-def return_id_aluno(id_aluno):
-    student = find_student_by_id(id_aluno)
-    student[0] if student else None
+# def return_id_aluno(id_aluno):
+#     student = find_student_by_id(id_aluno)
+#     student[0] if student else None
 

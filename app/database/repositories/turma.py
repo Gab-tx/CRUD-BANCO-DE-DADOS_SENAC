@@ -1,3 +1,0 @@
-def catch_turma_id():
-    sql = '''SELECT fk_curso FROM tbl_turma WHERE id_turma = %s'''
-    ...
